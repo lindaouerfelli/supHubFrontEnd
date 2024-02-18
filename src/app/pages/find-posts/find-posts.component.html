@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center mt-5 p-3" style="background-color: #007bff; color: darkorange ">Hunt for free deals...</h1>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 text-right">
+      <div class="filter-wrapper rounded p-3 bg-primary text-white">
+        <div class="form-group mb-0">
+          <label for="categoryFilter" class="mr-2">Filter by Category:</label>
+          <select class="form-control form-control-sm" id="categoryFilter">
+            <option value="">All</option>
+            <option>LIVRES</option>
+            <option>ELECTRONIQUE</option>
+            <option>VETEMENTS</option>
+            <option>MEUBLES</option>
+            <option>EQUIPEMENTSPORTIF</option>
+            <option>AUTRES</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="statusFilter" class="mr-2">Filter by Status:</label>
+          <select class="form-control form-control-sm" id="statusFilter">
+            <option value="">All</option>
+            <option>AVAILABLE</option>
+            <option>RESERVED</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Item Name 1</h5>
+          <p class="card-text">Item Description 1</p>
+          <p class="card-text">Category: ELECTRONIQUE</p>
+          <p class="card-text">Posted by User ID: 123</p>
+          <p class="card-text">Post Date: 2024-02-05</p>
+          <p class="card-text">Status: AVAILABLE</p>
+          <button [routerLink]="'/user/new-message'" class="btn btn-primary mt-2 ml-2">Contact Owner</button>
+          <button [routerLink]="'/user/new-reservation'" class="btn btn-primary mt-2 ml-2">Reserve</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ajout de cinq autres cartes similaires avec des images réelles -->
+
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <img class="card-img-top" src="https://via.placeholder.com/300x200" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Item Name 2</h5>
+          <p class="card-text">Item Description 2</p>
+          <p class="card-text">Category: VETEMENTS</p>
+          <p class="card-text">Posted by User ID: 456</p>
+          <p class="card-text">Post Date: 2024-02-05</p>
+          <p class="card-text">Status: RESERVED</p>
+          <button [routerLink]="'/user/new-reservation'" class="btn btn-primary mt-2 ml-2">Reserve</button>
+          <button [routerLink]="'/user/new-message'" class="btn btn-primary mt-2 ml-2">Contact Owner</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ajout de trois autres cartes similaires avec des images réelles -->
+
+  </div>
+</div>
