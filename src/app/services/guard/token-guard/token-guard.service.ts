@@ -15,7 +15,7 @@ export class TokenGuardService implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    // STEP 1 : vérifier quele token est valide
+    // STEP 1 : vérifier si on  aun token ou pas
 
     const token = localStorage.getItem('token');
 
