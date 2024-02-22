@@ -5,37 +5,16 @@
         <h2 class="text-center mb-4">My Messages</h2>
 
         <div class="d-flex justify-content-end mb-3">
-
           <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success">
-
             <em class="fas fa-plus"></em> New message
-
-          </a>&nbsp;
-
+          </a>
         </div>
 
-
-        <div class="message">
-          <p><strong>From:</strong> User123</p>
-          <p><strong>To:</strong> User456</p>
-          <p><strong>Sent At:</strong> 2024-02-05 08:30:00</p>
-          <p><strong>Content:</strong> Hello, how are you?</p>
-          <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success btn-sm mt-2">Reply</a>
-        </div>
-
-        <div class="message mt-3">
-          <p><strong>From:</strong> User789</p>
-          <p><strong>To:</strong> User123</p>
-          <p><strong>Sent At:</strong> 2024-02-06 10:15:00</p>
-          <p><strong>Content:</strong> Could you please send me the document?</p>
-          <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success btn-sm mt-2">Reply</a>
-        </div>
-
-        <div class="message mt-3">
-          <p><strong>From:</strong> User456</p>
-          <p><strong>To:</strong> User789</p>
-          <p><strong>Sent At:</strong> 2024-02-07 12:00:00</p>
-          <p><strong>Content:</strong> Let's meet tomorrow for lunch.</p>
+        <div class="message" *ngFor="let message of messages">
+          <p><strong>From:</strong> {{ message.senderId }} - {{message.senderName}}</p>
+          <p><strong>To:</strong> {{ message.receiverId }} - {{message.receiverName}}</p>
+          <p><strong>Sent At:</strong> {{ message.sentAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+          <p><strong>Content:</strong> {{ message.content }}</p>
           <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success btn-sm mt-2">Reply</a>
         </div>
 

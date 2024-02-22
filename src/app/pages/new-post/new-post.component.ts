@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {PostDto} from "../../services/models/post-dto";
-import {PostsService} from "../../services/services/posts.service";
-import {HelperService} from "../../services/helper/helper.service";
-import {Router} from "@angular/router";
-import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
-import {save} from "../../services/fn/users/save";
+import {Component, OnInit, Sanitizer} from '@angular/core';
+import { PostsService } from "../../services/services/posts.service";
+import { PostDto } from "../../services/models/post-dto";
+import { Router } from "@angular/router";
+import { HelperService } from "../../services/helper/helper.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-new-post',
@@ -14,10 +13,12 @@ import {save} from "../../services/fn/users/save";
 export class NewPostComponent implements OnInit {
 
 
-  constructor(
-  ) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+
   }
 
 }
+

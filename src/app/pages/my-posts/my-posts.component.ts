@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PostsService} from "../../services/services/posts.service";
 import {PostDto} from "../../services/models/post-dto";
 import {HelperService} from "../../services/helper/helper.service";
+import {MessageDto} from "../../services/models/message-dto";
 
 @Component({
   selector: 'app-my-posts',

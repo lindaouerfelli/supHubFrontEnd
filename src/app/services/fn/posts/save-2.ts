@@ -6,26 +6,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { PostDto } from '../../models/post-dto';
 
 export interface Save2$Params {
-  itemName: string;
-  itemDescription: string;
-  itemCategory: 'LIVRES' | 'ELECTRONIQUE' | 'VETEMENTS' | 'MEUBLES' | 'EQUIPEMENTSPORTIF' | 'AUTRES';
-  status: 'AVAILABLE' | 'RESERVED';
-  userId: number;
-      body?: {
-'image': Blob;
-}
+      body: PostDto
 }
 
 export function save2(http: HttpClient, rootUrl: string, params: Save2$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, save2.PATH, 'post');
   if (params) {
-    rb.query('itemName', params.itemName, {});
-    rb.query('itemDescription', params.itemDescription, {});
-    rb.query('itemCategory', params.itemCategory, {});
-    rb.query('status', params.status, {});
-    rb.query('userId', params.userId, {});
     rb.body(params.body, 'application/json');
   }
 
