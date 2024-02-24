@@ -19,6 +19,8 @@ import {ConfirmRegisterComponent} from "./pages/confirm-register/confirm-registe
 import {TokenGuardService} from "./services/guard/token-guard/token-guard.service";
 import {AdminGuardService} from "./services/guard/admin-guard/admin-guard.service";
 import {AccessDeniedComponent} from "./pages/access-denied/access-denied.component";
+import {ConfirmReservationComponent} from "./pages/confirm-reservation/confirm-reservation.component";
+import {PostDetailsComponent} from "./pages/post-details/post-details.component";
 
 const routes: Routes = [
 
@@ -37,10 +39,19 @@ const routes: Routes = [
     component : ConfirmRegisterComponent
   },
 
+  {
+    path : 'confirm-reservation',
+    component : ConfirmReservationComponent
+  },
 
   {
     path : 'access-denied',
     component : AccessDeniedComponent
+  },
+
+  {
+    path : 'post-details/:id',
+    component : PostDetailsComponent
   },
 
 
@@ -49,6 +60,7 @@ const routes: Routes = [
     component : MainPageComponent, // jai fais ca pour que ces interfaces ces compsoants ne soient pas affichés que pour le user sous /user et pareil on va faire poru ladmin
     canActivate : [TokenGuardService],
     children : [
+
 
       {
         path : 'dashboard',

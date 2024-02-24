@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PostDto } from "../../services/models/post-dto";
 import { PostsService } from "../../services/services/posts.service";
 import { HelperService } from "../../services/helper/helper.service";
+import {ReservationsService} from "../../services/services/reservations.service";
+import {ReservationDto} from "../../services/models/reservation-dto";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-find-posts',
@@ -10,14 +13,22 @@ import { HelperService } from "../../services/helper/helper.service";
 })
 export class FindPostsComponent implements OnInit {
 
+  reservation : ReservationDto = {};
+
   posts: Array<PostDto> = [];
   filteredPosts: Array<PostDto> = [];
   selectedCategory: string = '';
   selectedStatus: string = '';
+  errorMessages : Array<string> = [];
+
+
 
   constructor(
     private postService: PostsService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private reservationService : ReservationsService,
+    private router : Router,
+
   ) { }
 
   ngOnInit(): void {
@@ -67,5 +78,53 @@ export class FindPostsComponent implements OnInit {
       }
     }
   }
+
+
+   reserve(postId: number | undefined) {
+     if (postId !== undefined) {
+       this.postService.updatePostStatus({
+         'post-id' : postId
+       })
+         .subscribe(() => {
+           this.reservation.userId = this.helperService.UserId;
+           this.reservation.postId = postId
+           this.reservationService.save1({
+             body : this.reservation
+           }).subscribe({
+             next : async (data) => {
+               await this.router.navigate (['confirm-reservation']);
+             },
+             error : (err) => {
+               this.errorMessages = err.error.validationErrors;
+             }
+           });
+         });
+     }
+
+     else
+     {
+       console.error('postId est undefined');
+     }
+   }
+
+
+ /* reserve(postId: number | undefined) {
+    if (postId !== undefined) {
+      const params: CheckPostStatus$Params = { 'post-id': postId };
+      this.reservationService.checkPostStatus(params)
+        .subscribe((response) => {
+        this.reservationMessage = response;
+        //console.log('Reservation message:', this.reservationMessage); // Ajouter cette ligne
+
+          /!*    if (response.message === 'Post is available.') {
+                console.log('Réservation effectuée avec succès !');
+              } else if (response.message === 'Post is already reserved.') {
+                console.log('Ce post est déjà réservé.');
+              }*!/
+      });
+    } else {
+      console.error('postId est undefined');
+    }
+  }*/
 
 }

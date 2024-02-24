@@ -12,13 +12,43 @@ import {NgForm} from "@angular/forms";
 })
 export class NewPostComponent implements OnInit {
 
+  post : PostDto = {};
+  errorMessages : Array<string> = [];
 
-  constructor() {
+
+  constructor(
+
+    private postService : PostsService,
+    private router : Router,
+    private helperService : HelperService
+
+  ) {
   }
 
   ngOnInit(): void {
-
   }
 
+  save () {
+    this.post.userId = this.helperService.UserId;
+    this.post.ownerFullName = this.helperService.UserFullname;
+    this.postService.save2({
+
+      body : this.post
+    })
+      .subscribe({
+        next : async (data) => {
+          await this.router.navigate (['user/my-posts']);
+        },
+        error : (err) => {
+          this.errorMessages = err.error.validationErrors;
+        }
+      });
+  }
+
+  async cancel() {
+
+    await this.router.navigate(['user/my-posts']);
+
+  }
 }
 

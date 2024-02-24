@@ -24,11 +24,88 @@ import { GetAllPostsByUser1$Params } from '../fn/posts/get-all-posts-by-user-1';
 import { PostDto } from '../models/post-dto';
 import { save2 } from '../fn/posts/save-2';
 import { Save2$Params } from '../fn/posts/save-2';
+import { updatePostStatus } from '../fn/posts/update-post-status';
+import { UpdatePostStatus$Params } from '../fn/posts/update-post-status';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `findById2()` */
+  static readonly FindById2Path = '/posts/{post-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findById2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById2$Response(params: FindById2$Params, context?: HttpContext): Observable<StrictHttpResponse<PostDto>> {
+    return findById2(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findById2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById2(params: FindById2$Params, context?: HttpContext): Observable<PostDto> {
+    return this.findById2$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PostDto>): PostDto => r.body)
+    );
+  }
+
+  /** Path part for operation `updatePostStatus()` */
+  static readonly UpdatePostStatusPath = '/posts/{post-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updatePostStatus()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  updatePostStatus$Response(params: UpdatePostStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return updatePostStatus(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updatePostStatus$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  updatePostStatus(params: UpdatePostStatus$Params, context?: HttpContext): Observable<void> {
+    return this.updatePostStatus$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `delete2()` */
+  static readonly Delete2Path = '/posts/{post-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `delete2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delete2$Response(params: Delete2$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return delete2(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `delete2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delete2(params: Delete2$Params, context?: HttpContext): Observable<void> {
+    return this.delete2$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
   }
 
   /** Path part for operation `findAll2()` */
@@ -78,56 +155,6 @@ export class PostsService extends BaseService {
   save2(params: Save2$Params, context?: HttpContext): Observable<number> {
     return this.save2$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
-    );
-  }
-
-  /** Path part for operation `findById2()` */
-  static readonly FindById2Path = '/posts/{post-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById2()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById2$Response(params: FindById2$Params, context?: HttpContext): Observable<StrictHttpResponse<PostDto>> {
-    return findById2(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById2$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById2(params: FindById2$Params, context?: HttpContext): Observable<PostDto> {
-    return this.findById2$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PostDto>): PostDto => r.body)
-    );
-  }
-
-  /** Path part for operation `delete2()` */
-  static readonly Delete2Path = '/posts/{post-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete2()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  delete2$Response(params: Delete2$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return delete2(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete2$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  delete2(params: Delete2$Params, context?: HttpContext): Observable<void> {
-    return this.delete2$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

@@ -26,6 +26,8 @@ import {HttpInterceptorService} from "./services/http-interceptor/http-intercept
 import {FormsModule} from "@angular/forms";
 import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { ConfirmReservationComponent } from './pages/confirm-reservation/confirm-reservation.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
     MainAdminPageComponent,
     AdminDashboardComponent,
     ConfirmRegisterComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    ConfirmReservationComponent,
+    PostDetailsComponent
   ],
   imports: [
     BrowserModule,

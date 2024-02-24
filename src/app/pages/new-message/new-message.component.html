@@ -3,30 +3,81 @@
     <div class="col-md-6">
       <div class="card p-4 bg-primary text-white">
         <h2 class="text-center mb-4">Create New Message</h2>
-        <form>
-          <!-- Champ caché pour l'ID de l'expéditeur -->
-          <!--<input type="hidden" id="senderId" value="{{ senderId }}"> -->
+        <hr>
 
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessages && errorMessages.length">
+          <p *ngFor="let msg of errorMessages">{{ msg }}</p>
+        </div>
+
+
+        <form>
 
           <div class="form-group">
-            <label for="senderId">FROM : Sender ID:</label>
-            <input type="text" class="form-control" id="senderId" placeholder="Enter sender's ID">
+            <label for="receiverId">To: Receiver ID</label>
+            <input [(ngModel)]="message.receiverId" name="receiverId" type="text" class="form-control" id="receiverId" placeholder="Enter receiver's ID">
           </div>
 
+          <div class="form-group">
+            <label for="receiverName">From: Receiver Name</label>
+            <input [(ngModel)]="message.receiverName" name="receiverName" type="text" class="form-control" id="receiverName" placeholder="Enter receiver's Fullname mentioned on the post">
+          </div>
+
+          <div class="form-group">
+            <label for="content">Message Content</label>
+            <textarea [(ngModel)]="message.content" name="content" class="form-control" id="content" rows="5" placeholder="Enter message content"></textarea>
+          </div>
+
+          <div class="form-group text-right">
+            <button (click)="save()" type="submit" class="btn btn-success btn-block mt-3">Send Message</button>
+          </div>
+
+          <div class="form-group text-right">
+            <button (click)="cancel()" type="submit" class="btn btn-danger btn-block mt-3">Cancel</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4 bg-primary text-white">
+        <h2 class="text-center mb-4">Create New Message</h2>
+        <hr>
+
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessages.length">
+          <p *ngFor="let msg of errorMessages">{{ msg }}</p>
+        </div>
+        <form>
+          &lt;!&ndash; Champ caché pour l'ID de l'expéditeur &ndash;&gt;
+          &lt;!&ndash;<input type="hidden" id="senderId" value="{{ senderId }}"> &ndash;&gt;
 
           <div class="form-group">
             <label for="receiverId">TO : Receiver ID:</label>
-            <input type="text" class="form-control" id="receiverId" placeholder="Enter receiver's ID">
+            <input [(ngModel)]="message.receiverId" type="text" class="form-control" id="receiverId" placeholder="Enter receiver's ID">
+          </div>
+
+          <div class="form-group">
+            <label for="senderId">FROM : Receiver Name:</label>
+            <input [(ngModel)]="message.receiverName" type="text" class="form-control" id="senderId" placeholder="Enter receiver's Fullname mentioned on the post ">
           </div>
 
           <div class="form-group">
             <label for="content">Message Content:</label>
-            <textarea class="form-control" id="content" rows="5" placeholder="Enter message content"></textarea>
+            <textarea [(ngModel)]="message.content" class="form-control" id="content" rows="5" placeholder="Enter message content"></textarea>
           </div>
 
           <div class="form-group text-right">
-            <button type="submit" class="btn btn-success btn-block mt-3">Send Message</button>
+            <button (click)="save()" type="submit" class="btn btn-success btn-block mt-3">Send Message</button>
           </div>
+
+          <div class="form-group text-right">
+            <button (click)="cancel()" type="submit" class="btn btn-danger btn-block mt-3">Cancel</button>
+          </div>
+
 
 
         </form>
@@ -34,3 +85,4 @@
     </div>
   </div>
 </div>
+-->

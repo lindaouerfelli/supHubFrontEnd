@@ -13,18 +13,52 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>2024-02-05</td>
-            <td>123</td>
-            <td>456</td>
+          <tr *ngFor="let res of reservations">
+            <td>{{ res.reservationDate }}</td>
+            <td>{{ res.postId }}</td>
+            <td>{{ res.userId }}</td>
             <td>
-              <button class="btn btn-primary">Show Reserved Post</button>
+              <button class="btn btn-primary" (click)="showPostDetails(res.postId)">Show Reserved Post</button>
             </td>
           </tr>
-          <!-- Ajoutez ici d'autres lignes pour chaque réservation -->
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+<!--
+  &lt;!&ndash; Modal &ndash;&gt;
+  <div class="modal" [class.show]="showPostDetailsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        &lt;!&ndash; Modal Header &ndash;&gt;
+        <div class="modal-header">
+          <h4 class="modal-title">Reserved Post Details</h4>
+          <button type="button" class="close" aria-label="Close" (click)="closePostDetailsModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        &lt;!&ndash; Modal Body &ndash;&gt;
+        <div class="modal-body">
+          &lt;!&ndash; Afficher les détails du post ici &ndash;&gt;
+          <p>Item Name: {{ selectedPost?.itemName }}</p>
+          <p>Item Description: {{ selectedPost?.itemDescription }}</p>
+          <p>Category: {{ selectedPost?.itemCategory }}</p>
+          <p>Posted by : {{ selectedPost?.ownerFullName }}</p>
+          <p>With User ID: {{ selectedPost?.userId }}</p>
+          <p>Post Date: {{ selectedPost?.postDate }}</p>
+          <p>Status: {{ selectedPost?.status }}</p>
+          <p>Post Id: {{ selectedPost?.id }}</p>
+
+          &lt;!&ndash; Ajoutez d'autres détails du post ici &ndash;&gt;
+        </div>
+        &lt;!&ndash; Modal Footer &ndash;&gt;
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closePostDetailsModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
 </div>

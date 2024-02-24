@@ -1,23 +1,27 @@
 <div class="p-3">
   <h2>New Post</h2>
+  <hr>
+
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessages.length">
+    <p *ngFor="let msg of errorMessages">{{ msg }}</p>
+  </div>
 
   <div class="card p-3">
 
     <div class="mb-3">
       <label class="form-label">Item Name</label>
-      <input type="text" class="form-control" placeholder="Enter item name">
+      <input [(ngModel)]="post.itemName" type="text" class="form-control" placeholder="Enter item name">
     </div>
 
     <div class="mb-3">
       <label class="form-label">Item Description</label>
-      <input type="text" class="form-control" placeholder="Enter item description">
-
+      <input [(ngModel)]="post.itemDescription" type="text" class="form-control" placeholder="Enter item description">
     </div>
 
     <div class="mb-3">
       <label class="form-label">Item Category</label>
-      <select class="form-select">
-        <option selected>Choose item category</option>
+      <select [(ngModel)]="post.itemCategory" class="form-select">
+        <option selected disabled>Choose item category</option>
         <option value="LIVRES">LIVRES</option>
         <option value="ELECTRONIQUE">ELECTRONIQUE</option>
         <option value="VETEMENTS">VETEMENTS</option>
@@ -27,31 +31,23 @@
       </select>
     </div>
 
-
-
     <div class="mb-3">
       <label class="form-label">Status</label>
-      <select  class="form-select">
-        <option selected>Choose status</option>
+      <select [(ngModel)]="post.status" class="form-select">
+        <option selected disabled>Choose status</option>
         <option value="AVAILABLE">AVAILABLE</option>
         <option value="RESERVED">RESERVED</option>
-
       </select>
     </div>
 
-
-
     <div class="d-flex justify-content-end">
-      <button  type="button" class="btn btn-link">
+      <button (click)="cancel()" type="button" class="btn btn-link">
         <em class="fas fa-times"></em>&nbsp;Cancel
       </button>
 
-      <button type="button" class="btn btn-danger">
+      <button (click)="save()" type="button" class="btn btn-danger">
         <em class="fas fa-save"></em>&nbsp;Save
       </button>
-
     </div>
-
-
   </div>
 </div>

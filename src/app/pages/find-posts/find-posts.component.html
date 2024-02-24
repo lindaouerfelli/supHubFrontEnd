@@ -5,6 +5,11 @@
     </div>
   </div>
 
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessages.length">
+    <p *ngFor="let msg of errorMessages">{{msg}}</p>
+  </div >
+
+
   <div class="filter-wrapper rounded p-3 bg-primary text-white">
     <div class="form-group mb-0">
       <label class="mr-2">Filter by Category:</label>
@@ -40,8 +45,9 @@
           <p class="card-text">With User ID: {{ pst.userId }}</p>
           <p class="card-text">Post Date: {{ pst.postDate }}</p>
           <p class="card-text">Status: {{ pst.status }}</p>
-          <button [routerLink]="'/user/new-message'" class="btn btn-primary mt-2 ml-2">Contact Owner</button>
-          <button [routerLink]="'/user/new-reservation'" class="btn btn-primary mt-2 ml-2">Reserve</button>
+          <p class="card-text">Post Id: {{ pst.id }}</p>
+          <button [routerLink]="'/user/new-message'" class="btn btn-primary mt-2 ml-2" [disabled]="pst.status === 'RESERVED'">Contact Owner</button>
+          <button (click)="reserve(pst.id)" class="btn btn-primary mt-2 ml-2" [disabled]="pst.status === 'RESERVED'">Reserve</button>
         </div>
       </div>
     </div>
