@@ -58,7 +58,7 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   // quels sont les services que je dois fournir au bootstrap pu boen au démarrage del'app
   //au démarrage de lapp ce service sera dispo auniveau del'app

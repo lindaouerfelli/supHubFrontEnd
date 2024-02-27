@@ -13,12 +13,12 @@
         <form>
 
           <div class="form-group">
-            <label for="receiverId">To: Receiver ID</label>
-            <input [(ngModel)]="message.receiverId" name="receiverId" type="text" class="form-control" id="receiverId" placeholder="Enter receiver's ID">
+            <label for="senderName">From: </label>
+            <input [(ngModel)]="message.senderName" name="senderName" type="text" class="form-control" id="senderName" placeholder="Enter receiver's ID">
           </div>
 
           <div class="form-group">
-            <label for="receiverName">From: Receiver Name</label>
+            <label for="receiverName">to: </label>
             <input [(ngModel)]="message.receiverName" name="receiverName" type="text" class="form-control" id="receiverName" placeholder="Enter receiver's Fullname mentioned on the post">
           </div>
 

@@ -12,6 +12,8 @@ export class MyMessagesComponent implements OnInit {
 
   messages: Array<MessageDto> = [];
   //userFullname: string = '';
+  msgToDeleteId : any = -1;
+
 
   constructor(
     private messageService: MessagesService,
@@ -20,6 +22,11 @@ export class MyMessagesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.findAllMsgByUserId();
+  }
+
+
+  private findAllMsgByUserId() {
     this.messageService.findAllByUserId({
       'user-id': this.helperService.UserId
     }).subscribe({
@@ -29,16 +36,26 @@ export class MyMessagesComponent implements OnInit {
     });
   }
 
+  /*  ngOnInit(): void {
+      this.userFullname = this.helperService.UserFullname; // Obtenez le fullname de l'utilisateur connecté
+      this.messageService.findAllByUserId({
+        'user-id': this.helperService.UserId
+      }).subscribe({
+        next: (data) => {
+          this.messages = data;
+        }
+      });
+    }*/
 
-/*  ngOnInit(): void {
-    this.userFullname = this.helperService.UserFullname; // Obtenez le fullname de l'utilisateur connecté
-    this.messageService.findAllByUserId({
-      'user-id': this.helperService.UserId
-    }).subscribe({
-      next: (data) => {
-        this.messages = data;
-      }
-    });
-  }*/
+  delete() {
+    if(this.msgToDeleteId) {
+      this.messageService.delete3({
+        'message-id' : this.msgToDeleteId
+      }).subscribe({
+        next : () => {this.findAllMsgByUserId();}
 
+      });
+    }
+
+  }
 }

@@ -16,13 +16,43 @@
           <p><strong>Sent At:</strong> {{ message.sentAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
           <p><strong>Content:</strong> {{ message.content }}</p>
           <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success btn-sm mt-2">Reply</a>
-          <button type="button" class="btn btn-warning btn-sm mt-2"><em class="fas fa-edit"></em> Edit</button>
-          <button type="button" class="btn btn-danger btn-sm mt-2"><em class="fas fa-trash"></em> Delete</button>
+          <button (click)="msgToDeleteId = message.id" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  type="button" class="btn btn-danger btn-sm mt-2">
+            Delete
+          </button>
+
+
         </div>
 
 
 
 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Would you really want to delete this post ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-link" (click)="msgToDeleteId = -1"  data-bs-dismiss="modal">
+          <em class="fas fa-times"></em> &nbsp;Cancel
+
+        </button>
+        <button (click)="delete()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+
+          <em class="fas fa-trash"></em>&nbsp;Delete
+
+        </button>
       </div>
     </div>
   </div>

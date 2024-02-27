@@ -4,6 +4,7 @@ import {ReservationDto} from "../../services/models/reservation-dto";
 import {ReservationsService} from "../../services/services/reservations.service";
 import {Router} from "@angular/router";
 import {PostsService} from "../../services/services/posts.service";
+import {HelperService} from "../../services/helper/helper.service";
 
 @Component({
   selector: 'app-my-reservation',
@@ -14,18 +15,32 @@ export class MyReservationComponent implements OnInit {
 
   reservations: Array<ReservationDto> = [];
   selectedPost: PostDto | undefined;
-  showPostDetailsModal: boolean = false;
+  //showPostDetailsModal: boolean = false;
+  //reservationToDelete : any = -1;
+
+
+  //selectedReservationId: any;
+  //selectedPostId: any;
 
 
   constructor(
     private reservationService: ReservationsService,
     private router: Router,
-    private postService: PostsService
+    private postService: PostsService,
+    private helperService: HelperService,
+   // private _snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
-    this.reservationService.findAll1()
+    this.findAllReservationByUserId();
+  }
+
+  private findAllReservationByUserId() {
+    this.reservationService.getAllPostsByUser({
+      'userId': this.helperService.UserId
+
+    })
       .subscribe({
         next: (data) => {
           this.reservations = data;
@@ -33,14 +48,42 @@ export class MyReservationComponent implements OnInit {
       });
   }
 
-   showPostDetails(postId: number | undefined) {
+
+  showPostDetails(postId: number | undefined) {
     if (postId !== undefined) {
-       this.router.navigate(['/post-details', postId]); // Rediriger vers le composant des détails du post avec l'ID du post
+      //this.selectedPost = postId;
+      this.router.navigate(['/post-details', postId]); // Rediriger vers le composant des détails du post avec l'ID du post
 
     } else {
       console.error('postId est undefined');
     }
   }
+
+  delete(reservationId: number | undefined, postId: number | undefined) {
+    if (reservationId !== undefined && postId !== undefined) {
+
+      this.reservationService.delete1({
+        'reservation-id': reservationId
+      })
+        .subscribe({
+          next: () => {
+            this.findAllReservationByUserId();
+            this.postService.available({'post-id' : postId})
+              .subscribe({
+              next: () => {
+                console.log("suppression réussie ! ")
+                //this._snackBar.open('Suppression réussie.', 'Fermer', {
+                // duration: 2000,
+              }
+                });
+              },
+              error: (err) => {
+                console.error('Erreur lors de la mise à jour du statut du post:', err);
+              }
+            });
+
+    }
+
+  }
+
 }
-
-

@@ -9,7 +9,6 @@
     <p *ngFor="let msg of errorMessages">{{msg}}</p>
   </div >
 
-
   <div class="filter-wrapper rounded p-3 bg-primary text-white">
     <div class="form-group mb-0">
       <label class="mr-2">Filter by Category:</label>
@@ -23,6 +22,7 @@
         <option value="AUTRES">AUTRES</option>
       </select>
     </div>
+
     <div class="form-group">
       <label class="mr-2">Filter by Status:</label>
       <select class="form-control form-control-sm" [(ngModel)]="selectedStatus">
@@ -38,6 +38,7 @@
     <div class="col-md-4" *ngFor="let pst of filteredPosts">
       <div class="card mb-4">
         <div class="card-body">
+
           <h5 class="card-title">Item Name: {{ pst.itemName }}</h5>
           <p class="card-text">Item Description: {{ pst.itemDescription }}</p>
           <p class="card-text">Category: {{ pst.itemCategory }}</p>
@@ -46,8 +47,9 @@
           <p class="card-text">Post Date: {{ pst.postDate }}</p>
           <p class="card-text">Status: {{ pst.status }}</p>
           <p class="card-text">Post Id: {{ pst.id }}</p>
-          <button [routerLink]="'/user/new-message'" class="btn btn-primary mt-2 ml-2" [disabled]="pst.status === 'RESERVED'">Contact Owner</button>
-          <button (click)="reserve(pst.id)" class="btn btn-primary mt-2 ml-2" [disabled]="pst.status === 'RESERVED'">Reserve</button>
+
+          <button [routerLink]="['/user/new-message', { ownerFullName: pst.ownerFullName, userId: pst.userId }]" class="btn btn-primary mt-2 ml-2">Contact Owner</button>
+          <button (click)="reserve(pst.id)" class="btn btn-primary mt-2 ml-2" [disabled]="pst.status !== 'AVAILABLE'">Reserve</button>
         </div>
       </div>
     </div>

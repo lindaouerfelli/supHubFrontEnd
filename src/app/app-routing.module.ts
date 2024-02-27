@@ -78,6 +78,11 @@ const routes: Routes = [
       },
 
       {
+        path : 'new-post/:idPost',
+        component : NewPostComponent
+      },
+
+      {
         path : 'my-messages',
         component : MyMessagesComponent
       },

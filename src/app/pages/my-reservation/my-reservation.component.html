@@ -17,8 +17,47 @@
             <td>{{ res.reservationDate }}</td>
             <td>{{ res.postId }}</td>
             <td>{{ res.userId }}</td>
-            <td>
+            <td class="cursor-pointer">
               <button class="btn btn-primary" (click)="showPostDetails(res.postId)">Show Reserved Post</button>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <button class="btn btn-danger" (click)="delete(res.id, res.postId)">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="bg-primary text-white p-3">My Reservations</h2>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Reservation Date</th>
+            <th scope="col">Post ID</th>
+            <th scope="col">User ID</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let res of reservations">
+            <td>{{ res.reservationDate }}</td>
+            <td>{{ res.postId }}</td>
+            <td>{{ res.userId }}</td>
+            <td class="cursor-pointer">
+              <button class="btn btn-primary" (click)="showPostDetails(res.postId)">Show Reserved Post</button>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+              <em (click)="reservationToDelete = res.id ; openDeleteModal(res.id, res.postId)" class="fas fa-trash text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></em>
+
             </td>
           </tr>
           </tbody>
@@ -27,38 +66,32 @@
     </div>
   </div>
 
-<!--
-  &lt;!&ndash; Modal &ndash;&gt;
-  <div class="modal" [class.show]="showPostDetailsModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        &lt;!&ndash; Modal Header &ndash;&gt;
-        <div class="modal-header">
-          <h4 class="modal-title">Reserved Post Details</h4>
-          <button type="button" class="close" aria-label="Close" (click)="closePostDetailsModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        &lt;!&ndash; Modal Body &ndash;&gt;
-        <div class="modal-body">
-          &lt;!&ndash; Afficher les détails du post ici &ndash;&gt;
-          <p>Item Name: {{ selectedPost?.itemName }}</p>
-          <p>Item Description: {{ selectedPost?.itemDescription }}</p>
-          <p>Category: {{ selectedPost?.itemCategory }}</p>
-          <p>Posted by : {{ selectedPost?.ownerFullName }}</p>
-          <p>With User ID: {{ selectedPost?.userId }}</p>
-          <p>Post Date: {{ selectedPost?.postDate }}</p>
-          <p>Status: {{ selectedPost?.status }}</p>
-          <p>Post Id: {{ selectedPost?.id }}</p>
-
-          &lt;!&ndash; Ajoutez d'autres détails du post ici &ndash;&gt;
-        </div>
-        &lt;!&ndash; Modal Footer &ndash;&gt;
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closePostDetailsModal()">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>-->
 
 </div>
+
+&lt;!&ndash; Modal &ndash;&gt;
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Would you really want to delete this post ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-link" (click)="reservationToDelete = -1"  data-bs-dismiss="modal">
+          <em class="fas fa-times"></em> &nbsp;Cancel
+        </button>
+
+        <button (click)="delete()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <em class="fas fa-trash"></em>&nbsp;Delete
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+-->

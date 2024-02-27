@@ -7,12 +7,12 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface UpdatePostStatus$Params {
+export interface Available$Params {
   'post-id': number;
 }
 
-export function updatePostStatus(http: HttpClient, rootUrl: string, params: UpdatePostStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, updatePostStatus.PATH, 'put');
+export function available(http: HttpClient, rootUrl: string, params: Available$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, available.PATH, 'put');
   if (params) {
     rb.path('post-id', params['post-id'], {});
   }
@@ -27,4 +27,4 @@ export function updatePostStatus(http: HttpClient, rootUrl: string, params: Upda
   );
 }
 
-updatePostStatus.PATH = '/posts/reserved/{post-id}';
+available.PATH = '/posts/available/{post-id}';

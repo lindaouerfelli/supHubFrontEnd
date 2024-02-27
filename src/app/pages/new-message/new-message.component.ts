@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PostsService} from "../../services/services/posts.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HelperService} from "../../services/helper/helper.service";
 import {MessagesService} from "../../services/services/messages.service";
 import {PostDto} from "../../services/models/post-dto";
@@ -15,21 +15,35 @@ export class NewMessageComponent implements OnInit {
 
   message : MessageDto = {};
   errorMessages: Array<string> = [];
+  ownerFullName: string = '';
+  userId: number | undefined;
+
 
   constructor(
 
     private messageService : MessagesService,
     private router : Router,
-    private helperService : HelperService
+    private helperService : HelperService,
+    private route: ActivatedRoute
+
 
   ) { }
 
   ngOnInit(): void {
+    // Récupérer les paramètres de l'URL
+    this.route.params.subscribe(params => {
+      this.ownerFullName = params['ownerFullName'];
+      this.userId = params['userId'];
+    });
   }
 
   save () {
+
     this.message.senderId = this.helperService.UserId;
     this.message.senderName = this.helperService.UserFullname;
+    this.message.receiverName = this.ownerFullName;
+    this.message.receiverId = this.userId;
+
     this.messageService.save3({
 
       body : this.message

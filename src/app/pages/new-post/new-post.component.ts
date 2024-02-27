@@ -1,7 +1,7 @@
 import {Component, OnInit, Sanitizer} from '@angular/core';
 import { PostsService } from "../../services/services/posts.service";
 import { PostDto } from "../../services/models/post-dto";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { HelperService } from "../../services/helper/helper.service";
 import {NgForm} from "@angular/forms";
 
@@ -20,12 +20,25 @@ export class NewPostComponent implements OnInit {
 
     private postService : PostsService,
     private router : Router,
-    private helperService : HelperService
+    private helperService : HelperService,
+    private activatedRoute : ActivatedRoute
 
   ) {
   }
 
   ngOnInit(): void {
+    const postId = this.activatedRoute.snapshot.params['idPost'];
+    if (postId) {
+      this.postService.findById2({
+        'post-id' : this.activatedRoute.snapshot.params['idPost']
+      }).subscribe({
+        next : (data) => {
+          this.post = data;
+
+        }
+      });
+
+    }
   }
 
   save () {

@@ -21,8 +21,6 @@ export class FindPostsComponent implements OnInit {
   selectedStatus: string = '';
   errorMessages : Array<string> = [];
 
-
-
   constructor(
     private postService: PostsService,
     private helperService: HelperService,

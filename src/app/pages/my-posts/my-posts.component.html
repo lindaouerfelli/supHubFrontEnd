@@ -33,7 +33,9 @@
         <td>{{ pst.status }}</td>
 
         <td class="cursor-pointer">
-          <em class="fas fa-edit text-primary"></em>&nbsp;|&nbsp;<em class="fas fa-trash text-danger"></em>
+          <em (click)="update(pst.id)" class="fas fa-edit text-primary"></em>&nbsp;
+          |&nbsp;
+          <em (click)="delete(pst.id)" class="fas fa-trash text-danger"></em>
         </td>
       </tr>
 
@@ -41,4 +43,34 @@
       </tbody>
     </table>
   </div>
+
 </div>
+
+
+<!--
+ Modal
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Would you really want to delete this post ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-link" (click)="postToDelete = -1"  data-bs-dismiss="modal">
+        <em class="fas fa-times"></em> &nbsp;Cancel
+
+        </button>
+        <button (click)="delete()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+
+          <em class="fas fa-trash"></em>&nbsp;Delete
+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
