@@ -21,6 +21,8 @@ import {AdminGuardService} from "./services/guard/admin-guard/admin-guard.servic
 import {AccessDeniedComponent} from "./pages/access-denied/access-denied.component";
 import {ConfirmReservationComponent} from "./pages/confirm-reservation/confirm-reservation.component";
 import {PostDetailsComponent} from "./pages/post-details/post-details.component";
+import {AcceptReservationComponent} from "./pages/accept-reservation/accept-reservation.component";
+import {MessageReservationComponent} from "./pages/message-reservation/message-reservation.component";
 
 const routes: Routes = [
 
@@ -52,6 +54,11 @@ const routes: Routes = [
   {
     path : 'post-details/:id',
     component : PostDetailsComponent
+  },
+
+  {
+    path : 'accept-reservation',
+    component : AcceptReservationComponent
   },
 
 
@@ -90,6 +97,11 @@ const routes: Routes = [
       {
         path : 'new-message',
         component : NewMessageComponent
+      },
+
+      {
+        path: 'message-reservation/:userId/:firstname/:lastname',
+        component: MessageReservationComponent
       },
 
       {

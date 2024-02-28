@@ -17,6 +17,8 @@ import { findById1 } from '../fn/reservations/find-by-id-1';
 import { FindById1$Params } from '../fn/reservations/find-by-id-1';
 import { getAllPostsByUser } from '../fn/reservations/get-all-posts-by-user';
 import { GetAllPostsByUser$Params } from '../fn/reservations/get-all-posts-by-user';
+import { getReservationByPostId } from '../fn/reservations/get-reservation-by-post-id';
+import { GetReservationByPostId$Params } from '../fn/reservations/get-reservation-by-post-id';
 import { ReservationDto } from '../models/reservation-dto';
 import { save1 } from '../fn/reservations/save-1';
 import { Save1$Params } from '../fn/reservations/save-1';
@@ -149,6 +151,31 @@ export class ReservationsService extends BaseService {
   getAllPostsByUser(params: GetAllPostsByUser$Params, context?: HttpContext): Observable<Array<ReservationDto>> {
     return this.getAllPostsByUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ReservationDto>>): Array<ReservationDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `getReservationByPostId()` */
+  static readonly GetReservationByPostIdPath = '/reservations/post/{post-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getReservationByPostId()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getReservationByPostId$Response(params: GetReservationByPostId$Params, context?: HttpContext): Observable<StrictHttpResponse<ReservationDto>> {
+    return getReservationByPostId(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getReservationByPostId$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getReservationByPostId(params: GetReservationByPostId$Params, context?: HttpContext): Observable<ReservationDto> {
+    return this.getReservationByPostId$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ReservationDto>): ReservationDto => r.body)
     );
   }
 

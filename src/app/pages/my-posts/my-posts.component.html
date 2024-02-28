@@ -1,3 +1,60 @@
+<div *ngIf="showModal" class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">Reservation Details</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="showModal = false;"></button>
+      </div>
+      <div class="modal-body">
+        <p>Reservation ID: {{ selectedReservation?.id }}</p>
+        <p>Post ID: {{ selectedReservation?.postId }}</p>
+        <p>User ID: {{ selectedReservation?.userId }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-3">
+  <h2>My posts</h2>
+
+  <div class="d-flex justify-content-end mb-3">
+    <a [routerLink]="'/user/new-post'" type="button" class="btn btn-success">
+      <em class="fas fa-plus"></em> New post
+    </a>&nbsp;
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">postDate</th>
+        <th scope="col">itemName</th>
+        <th scope="col">itemDescription</th>
+        <th scope="col">itemCategory</th>
+        <th scope="col">status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pst of posts">
+        <th scope ="row">{{pst.postDate}}</th>
+        <td>{{ pst.itemName }}</td>
+        <td>{{ pst.itemDescription }} </td>
+        <td>{{ pst.itemCategory }}</td>
+        <td>{{ pst.status }}</td>
+        <td class="cursor-pointer">
+          <em (click)="update(pst.id)" class="fas fa-edit text-primary"></em>&nbsp; | &nbsp;
+          <em (click)="delete(pst.id)" class="fas fa-trash text-danger"></em>&nbsp; | &nbsp;
+          <button class="btn btn-primary" *ngIf="pst.status === 'RESERVED'" (click)="showReservationDetails(getReservationForPost(pst.id))">Show Reserved Details</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--
 <div class="p-3">
   <h2>My posts</h2>
 
@@ -33,9 +90,10 @@
         <td>{{ pst.status }}</td>
 
         <td class="cursor-pointer">
-          <em (click)="update(pst.id)" class="fas fa-edit text-primary"></em>&nbsp;
-          |&nbsp;
+          <em (click)="update(pst.id)" class="fas fa-edit text-primary"></em>&nbsp; | &nbsp;
           <em (click)="delete(pst.id)" class="fas fa-trash text-danger"></em>
+          <button *ngIf="pst.status === 'RESERVED'" (click)="showReservationDetails(getReservationForPost(pst.id))">Show Reserved Details</button>
+
         </td>
       </tr>
 
@@ -47,7 +105,7 @@
 </div>
 
 
-<!--
+&lt;!&ndash;
  Modal
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -73,4 +131,5 @@
     </div>
   </div>
 </div>
+&ndash;&gt;
 -->

@@ -5,6 +5,7 @@ import { HelperService } from "../../services/helper/helper.service";
 import {ReservationsService} from "../../services/services/reservations.service";
 import {ReservationDto} from "../../services/models/reservation-dto";
 import {Router} from "@angular/router";
+import {DataServiceService} from "../../services/first-service/data-service.service";
 
 @Component({
   selector: 'app-find-posts',
@@ -26,6 +27,8 @@ export class FindPostsComponent implements OnInit {
     private helperService: HelperService,
     private reservationService : ReservationsService,
     private router : Router,
+    private dataService: DataServiceService // Injectez le DataService
+
 
   ) { }
 
@@ -77,7 +80,6 @@ export class FindPostsComponent implements OnInit {
     }
   }
 
-
    reserve(postId: number | undefined) {
      if (postId !== undefined) {
        this.postService.updatePostStatus({
@@ -90,6 +92,7 @@ export class FindPostsComponent implements OnInit {
              body : this.reservation
            }).subscribe({
              next : async (data) => {
+               //this.dataService.setReservationDetails(postId, this.helperService.UserId);
                await this.router.navigate (['confirm-reservation']);
              },
              error : (err) => {
