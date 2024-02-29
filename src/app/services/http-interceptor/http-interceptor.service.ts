@@ -13,10 +13,10 @@ export class HttpInterceptorService implements HttpInterceptor{
   // il permet d'injecter de facon automatique le bearer token !
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (!req.url.includes('/authenticate') || !req.url.includes('/register')) {
+    if (!req.url.includes('/authenticate') && !req.url.includes('/register')) {
 
       const token = localStorage.getItem('token');
-      if (token !== undefined && token !== null) {
+      if (token) {
 
         //assigner le token;
 

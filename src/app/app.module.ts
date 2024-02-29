@@ -29,7 +29,6 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
 import { ConfirmReservationComponent } from './pages/confirm-reservation/confirm-reservation.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { AcceptReservationComponent } from './pages/accept-reservation/accept-reservation.component';
-import {MessageReservationComponent} from "./pages/message-reservation/message-reservation.component";
 
 @NgModule({
   declarations: [
@@ -49,7 +48,6 @@ import {MessageReservationComponent} from "./pages/message-reservation/message-r
     ManageUsersComponent,
     MainPageComponent,
     NewReservationComponent,
-    MessageReservationComponent,
     MainAdminPageComponent,
     AdminDashboardComponent,
     ConfirmRegisterComponent,

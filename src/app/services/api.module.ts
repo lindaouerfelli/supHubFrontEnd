@@ -4,8 +4,8 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { PostsService } from './services/posts.service';
 import { UsersService } from './services/users.service';
+import { PostsService } from './services/posts.service';
 import { ReservationsService } from './services/reservations.service';
 import { MessagesService } from './services/messages.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -19,8 +19,8 @@ import { StatisticsService } from './services/statistics.service';
   exports: [],
   declarations: [],
   providers: [
-    PostsService,
     UsersService,
+    PostsService,
     ReservationsService,
     MessagesService,
     AuthenticationService,

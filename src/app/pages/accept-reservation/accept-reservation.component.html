@@ -8,12 +8,23 @@
         <div class="card-body">
           <p><strong>Reserved By :</strong> {{ selectedUser?.firstname }} {{ selectedUser?.lastname }} - {{ reservation?.userId }}</p>
           <p><strong>Date of reservation:</strong> {{reservation?.reservationDate}}</p>
+
+          <!-- Ajout du message de confirmation ou de refus -->
+          <div class="container" *ngIf="confirmationMessage || denialMessage">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="alert alert-success mt-4" role="alert" *ngIf="confirmationMessage">{{ confirmationMessage }}</div>
+                <div class="alert alert-danger mt-4" role="alert" *ngIf="denialMessage">{{ denialMessage }}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <button [routerLink]="['/user/new-message', { ownerFullName: selectedUser?.firstname, userId: selectedUser?.id }]" class="btn btn-primary mt-2 ml-2">Contact Owner</button>
+        <!-- Boutons -->
+        <button [routerLink]="['/user/new-message', { ownerFullName: selectedUser?.firstname, userId: selectedUser?.id }]" class="btn btn-primary mt-2 ml-2">Contact reserver</button>
 
-        <button class="btn btn-primary mt-2 ml-2">Confirm reservation</button>
-        <button class="btn btn-primary mt-2 ml-2">delete reservation</button>
+        <button class="btn btn-success" (click)="confirmReservation()" class="btn btn-success mt-2 ml-2">Confirm reservation</button>
+        <button class="btn btn-danger mt-2 ml-2" (click)="denyReservation()">Denied reservation</button>
         <div class="card-footer">
           <button class="btn btn-primary" (click)="goBack()">Go Back</button>
         </div>

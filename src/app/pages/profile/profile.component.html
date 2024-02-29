@@ -12,44 +12,42 @@
     </div>
 
     <div class="card p-3">
-
-
       <div class="container mt-3 mb-3">
         <div class="card p-2" style="background-color: #1e90ff; color: white;">
           <h3 class="text-center">Personal info</h3>
         </div>
-
       </div>
 
       <div class="mb-3">
         <label for="firstname" class="form-label">Firstname</label>
-        <input type="text" class="form-control" id="firstname" placeholder="Firstname">
-      </div>
-
-
-      <div class="mb-3">
-        <label for="lastname" class="form-label">Lastname </label>
-        <input type="text" class="form-control" id="lastname" placeholder="Lastname">
+        <input type="text" class="form-control" id="firstname" [(ngModel)]="userdto.firstname" placeholder="Firstname">
       </div>
 
       <div class="mb-3">
-        <label for="email" class="form-label">Email </label>
-        <input type="email" class="form-control" id="email" placeholder="mail@email.com">
+        <label for="lastname" class="form-label">Lastname</label>
+        <input type="text" class="form-control" id="lastname" [(ngModel)]="userdto.lastname" placeholder="Lastname">
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="userdto.email" placeholder="mail@email.com">
       </div>
 
     </div>
 
     <div class="d-flex justify-content-end mt-3">
-
-      <button type="button" class="btn btn-danger me-2">
+      <button type="button" class="btn btn-danger me-2" (click)="cancelUpdate()">
         <em class="fas fa-times"></em>&nbsp;Cancel
       </button>
 
-
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" (click)="saveChanges()">
         <em class="fas fa-save"></em>&nbsp;Save
       </button>
+    </div>
 
+    <!-- Affichage du message -->
+    <div *ngIf="message" class="alert alert-success" role="alert">
+      {{ message }}
     </div>
 
   </div>

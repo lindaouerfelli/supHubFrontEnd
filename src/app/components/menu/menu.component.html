@@ -35,14 +35,15 @@
 
 
   <div class="d-flex align-items-center">
-    <a *ngIf="!isAdmin"  [routerLink]="'/user/new-post'" class="btn btn-success me-3" type="submit">
+    <a *ngIf="!isAdmin" [routerLink]="'/user/new-post'" class="btn btn-success me-3" type="submit">
       <em class="fas fa-plus"></em>&nbsp;New post
     </a>
 
-    <a [routerLink]="'/' + role +'/my-profile'">
-      <em class="fas fa-user"></em>&nbsp;Linda Ouerfelli
-
+    <a [routerLink]="'/' + role +'/my-profile'" class="me-3">
+      <em class="fas fa-user"></em>&nbsp;{{ fullname }}
     </a>
+
+    <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
   </div>
 
   </div>

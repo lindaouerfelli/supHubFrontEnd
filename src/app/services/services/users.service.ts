@@ -19,6 +19,8 @@ import { invalidateAccount } from '../fn/users/invalidate-account';
 import { InvalidateAccount$Params } from '../fn/users/invalidate-account';
 import { save } from '../fn/users/save';
 import { Save$Params } from '../fn/users/save';
+import { updateUserProfile } from '../fn/users/update-user-profile';
+import { UpdateUserProfile$Params } from '../fn/users/update-user-profile';
 import { UserDto } from '../models/user-dto';
 import { validateAccount } from '../fn/users/validate-account';
 import { ValidateAccount$Params } from '../fn/users/validate-account';
@@ -27,6 +29,81 @@ import { ValidateAccount$Params } from '../fn/users/validate-account';
 export class UsersService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `findById()` */
+  static readonly FindByIdPath = '/users/{user-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById$Response(params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+    return findById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById(params: FindById$Params, context?: HttpContext): Observable<UserDto> {
+    return this.findById$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
+    );
+  }
+
+  /** Path part for operation `updateUserProfile()` */
+  static readonly UpdateUserProfilePath = '/users/{user-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateUserProfile()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateUserProfile$Response(params: UpdateUserProfile$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+    return updateUserProfile(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateUserProfile$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateUserProfile(params: UpdateUserProfile$Params, context?: HttpContext): Observable<UserDto> {
+    return this.updateUserProfile$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
+    );
+  }
+
+  /** Path part for operation `delete()` */
+  static readonly DeletePath = '/users/{user-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `delete()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delete$Response(params: Delete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return delete$(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `delete$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delete(params: Delete$Params, context?: HttpContext): Observable<void> {
+    return this.delete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
   }
 
   /** Path part for operation `findAll()` */
@@ -126,56 +203,6 @@ export class UsersService extends BaseService {
   invalidateAccount(params: InvalidateAccount$Params, context?: HttpContext): Observable<number> {
     return this.invalidateAccount$Response(params, context).pipe(
       map((r: StrictHttpResponse<number>): number => r.body)
-    );
-  }
-
-  /** Path part for operation `findById()` */
-  static readonly FindByIdPath = '/users/{user-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById$Response(params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
-    return findById(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findById(params: FindById$Params, context?: HttpContext): Observable<UserDto> {
-    return this.findById$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
-    );
-  }
-
-  /** Path part for operation `delete()` */
-  static readonly DeletePath = '/users/{user-id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  delete$Response(params: Delete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return delete$(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  delete(params: Delete$Params, context?: HttpContext): Observable<void> {
-    return this.delete$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

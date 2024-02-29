@@ -22,7 +22,6 @@ import {AccessDeniedComponent} from "./pages/access-denied/access-denied.compone
 import {ConfirmReservationComponent} from "./pages/confirm-reservation/confirm-reservation.component";
 import {PostDetailsComponent} from "./pages/post-details/post-details.component";
 import {AcceptReservationComponent} from "./pages/accept-reservation/accept-reservation.component";
-import {MessageReservationComponent} from "./pages/message-reservation/message-reservation.component";
 
 const routes: Routes = [
 
@@ -99,10 +98,6 @@ const routes: Routes = [
         component : NewMessageComponent
       },
 
-      {
-        path: 'message-reservation/:userId/:firstname/:lastname',
-        component: MessageReservationComponent
-      },
 
       {
         path : 'my-reservations',
