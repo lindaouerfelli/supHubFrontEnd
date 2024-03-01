@@ -63,9 +63,32 @@ export class AcceptReservationComponent implements OnInit {
     this.confirmationMessage = 'Reservation successfully confirmed! Don\'t hesitate to contact the person who made the reservation by clicking on the "Contact Owner" button.';
   }
 
-  denyReservation(): void {
+  denyReservation(reservationId: number | undefined, postId: number | undefined): void {
     // Logique pour refuser la réservation
-    this.denialMessage = 'Reservation denied. Your announcement is available again.';
+    if (reservationId !== undefined && postId !== undefined) {
+
+      this.reservationService.delete1({
+        'reservation-id': reservationId
+      })
+        .subscribe({
+          next: () => {
+            this.postService.available({'post-id' : postId})
+              .subscribe({
+                next: () => {
+                  console.log("suppression réussie ! ")
+                  this.denialMessage = "Reservation denied. Your post is now available again."; // Définir le message de refus
+
+                  //this._snackBar.open('Suppression réussie.', 'Fermer', {
+                  // duration: 2000,
+                }
+              });
+          },
+          error: (err) => {
+            console.error('Erreur lors de la mise à jour du statut du post:', err);
+          }
+        });
+
+    }
   }
 
 }

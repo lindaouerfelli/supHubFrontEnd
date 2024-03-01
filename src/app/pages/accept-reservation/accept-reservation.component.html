@@ -21,10 +21,10 @@
         </div>
 
         <!-- Boutons -->
-        <button [routerLink]="['/user/new-message', { ownerFullName: selectedUser?.firstname, userId: selectedUser?.id }]" class="btn btn-primary mt-2 ml-2">Contact reserver</button>
+        <button [routerLink]="['/user/new-message', { ownerFullName: selectedUser?.firstname, userId: selectedUser?.id }]" class="btn btn-primary mt-2 ml-2">contact the person who reserved </button>
 
         <button class="btn btn-success" (click)="confirmReservation()" class="btn btn-success mt-2 ml-2">Confirm reservation</button>
-        <button class="btn btn-danger mt-2 ml-2" (click)="denyReservation()">Denied reservation</button>
+        <button class="btn btn-danger mt-2 ml-2" (click)="denyReservation(reservation?.id, reservation?.postId)">Denied reservation</button>
         <div class="card-footer">
           <button class="btn btn-primary" (click)="goBack()">Go Back</button>
         </div>

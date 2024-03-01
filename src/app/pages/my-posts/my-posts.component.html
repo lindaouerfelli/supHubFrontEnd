@@ -45,7 +45,7 @@
         <td class="cursor-pointer">
           <em (click)="update(pst.id)" class="fas fa-edit text-primary"></em>&nbsp; | &nbsp;
           <em (click)="delete(pst.id)" class="fas fa-trash text-danger"></em>&nbsp; | &nbsp;
-          <button class="btn btn-primary" *ngIf="pst.status === 'RESERVED'" (click)="showReservationDetails(getReservationForPost(pst.id))">Show Reserved Details</button>
+          <button class="btn btn-primary" *ngIf="pst.status === 'RESERVED'" (click)="showReservationDetails(getReservationForPost(pst.id))">Show reservation details</button>
         </td>
       </tr>
       </tbody>

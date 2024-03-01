@@ -15,7 +15,7 @@
           <p><strong>To:</strong> {{ message.receiverId }} - {{message.receiverName}}</p>
           <p><strong>Sent At:</strong> {{ message.sentAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
           <p><strong>Content:</strong> {{ message.content }}</p>
-          <a [routerLink]="'/user/new-message'" type="button" class="btn btn-success btn-sm mt-2">Reply</a>
+          <a [routerLink]="['/user/new-message', { ownerFullName: message.senderName, userId: message.senderId }]" class="btn btn-success btn-sm mt-2">Reply</a>
           <button (click)="msgToDeleteId = message.id" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  type="button" class="btn btn-danger btn-sm mt-2">
             Delete
           </button>
